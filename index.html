@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="ml">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Spymo Store - Download Spymo App</title>
+  <style>
+    /* Reset & Base Setup */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+    }
+
+    body {
+      background-color: #0f172a;
+      color: #f8fafc;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    /* Card Container */
+    .store-card {
+      background: #1e293b;
+      width: 100%;
+      max-width: 420px;
+      padding: 32px 24px;
+      border-radius: 20px;
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+      border: 1px solid #334155;
+      text-align: center;
+    }
+
+    /* Top Banner / Heading */
+    .top-title {
+      font-size: 22px;
+      font-weight: 700;
+      color: #38bdf8;
+      margin-bottom: 24px;
+      letter-spacing: -0.5px;
+    }
+
+    /* App Logo Container */
+    .logo-container {
+      margin: 0 auto 20px auto;
+      width: 110px;
+      height: 110px;
+      background: #0f172a;
+      border-radius: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 2px solid #3b82f6;
+      box-shadow: 0 4px 12px rgba(59, 130, 246, 0.2);
+    }
+
+    .logo-container img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 22px;
+    }
+
+    .logo-placeholder {
+      font-size: 40px;
+    }
+
+    /* App Details */
+    .app-title {
+      font-size: 24px;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 6px;
+    }
+
+    .app-subtitle {
+      font-size: 13px;
+      color: #94a3b8;
+      margin-bottom: 16px;
+    }
+
+    .app-description {
+      font-size: 14px;
+      color: #cbd5e1;
+      line-height: 1.5;
+      margin-bottom: 24px;
+    }
+
+    /* Badges / Meta Info */
+    .meta-grid {
+      display: flex;
+      justify-content: space-between;
+      background: #0f172a;
+      padding: 12px 16px;
+      border-radius: 12px;
+      margin-bottom: 24px;
+      border: 1px solid #334155;
+    }
+
+    .meta-item {
+      text-align: center;
+      flex: 1;
+    }
+
+    .meta-item:not(:last-child) {
+      border-right: 1px solid #334155;
+    }
+
+    .meta-label {
+      font-size: 11px;
+      color: #64748b;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 4px;
+    }
+
+    .meta-value {
+      font-size: 14px;
+      font-weight: 600;
+      color: #f1f5f9;
+    }
+
+    /* Download Button */
+    .download-btn {
+      display: block;
+      width: 100%;
+      background: #2563eb;
+      color: #ffffff;
+      font-size: 16px;
+      font-weight: 600;
+      padding: 14px;
+      border: none;
+      border-radius: 12px;
+      text-decoration: none;
+      text-align: center;
+      transition: background 0.2s ease;
+      cursor: pointer;
+    }
+
+    .download-btn:hover {
+      background: #1d4ed8;
+    }
+
+    .download-btn:active {
+      transform: scale(0.99);
+    }
+
+    /* Footer / Store Brand */
+    .footer-text {
+      margin-top: 20px;
+      font-size: 12px;
+      color: #64748b;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="store-card">
+    <!-- Top Heading -->
+    <h1 class="top-title">Download your Spymo</h1>
+
+    <!-- App Logo (Replace logo.png with your image file name or URL) -->
+    <div class="logo-container">
+      <img src="Splash.jpg" alt="Spymo Logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+      <div class="logo-placeholder" style="display:none;">📱</div>
+    </div>
+
+    <!-- App Name & Subtitle -->
+    <h2 class="app-title">Spymo</h2>
+    <p class="app-subtitle">Spymo Official App</p>
+
+    <!-- Description -->
+    <p class="app-description">
+      Spymo ആപ്പിന്റെ ഏറ്റവും പുതിയ പതിപ്പ് ഇവിടെ നിന്ന് നേരിട്ട് ഡൗൺലോഡ് ചെയ്യാം. വേഗതയേറിയതും ലളിതവുമായ ഉപയോഗ അനുഭവം.
+    </p>
+
+    <!-- Meta Details (Size, Version, Dev) -->
+    <div class="meta-grid">
+      <div class="meta-item">
+        <div class="meta-label">Size</div>
+        <div class="meta-value">10.63 MB</div>
+      </div>
+      <div class="meta-item">
+        <div class="meta-label">Latest Version</div>
+        <div class="meta-value">v1.5</div>
+      </div>
+      <div class="meta-item">
+        <div class="meta-label">System</div>
+        <div class="meta-value">Android</div>
+      </div>
+    </div>
+
+    <!-- Download Button (Paste your GitHub Release APK Direct Link here) -->
+    <a href="Spymo.apk" class="download-btn" id="downloadBtn">
+      Download APK
+    </a>
+
+    <!-- Store Footer -->
+    <p class="footer-text">Powered by InfinitySpot</p>
+  </div>
+
+  <script>
+    // Click Feedback Script (Ultra lightweight)
+    document.getElementById('downloadBtn').addEventListener('click', function(e) {
+      console.log('Download initiated...');
+    });
+  </script>
+  
+</body>
+  </html>
