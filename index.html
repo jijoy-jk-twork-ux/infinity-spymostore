@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ml">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -37,7 +37,7 @@
       position: sticky;
       top: 0;
       background: #fff;
-      z-index: 100;
+      z-index: 90;
     }
 
     .search-bar {
@@ -226,12 +226,25 @@
       cursor: pointer;
     }
 
-    /* Description & Details Section */
+    /* About Section & Play Store Arrow */
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      margin-bottom: 8px;
+    }
+
     .section-title {
       font-size: 16px;
       font-weight: 500;
       color: #202124;
-      margin-bottom: 12px;
+    }
+
+    .arrow-btn {
+      font-size: 18px;
+      color: #5f6368;
+      font-weight: bold;
     }
 
     .app-description {
@@ -239,8 +252,14 @@
       color: #5f6368;
       line-height: 1.5;
       margin-bottom: 24px;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      cursor: pointer;
     }
 
+    /* Details Table Box */
     .details-box {
       background: #f8f9fa;
       border-radius: 8px;
@@ -270,6 +289,69 @@
       color: #737373;
       margin-top: 20px;
     }
+
+    /* Modal Popup (Google Play Style) */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: #ffffff;
+      z-index: 1000;
+      flex-direction: column;
+      overflow-y: auto;
+    }
+
+    .modal-header {
+      display: flex;
+      align-items: center;
+      padding: 16px;
+      border-bottom: 1px solid #dadce0;
+      position: sticky;
+      top: 0;
+      background: #fff;
+    }
+
+    .close-btn {
+      font-size: 24px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: #5f6368;
+      margin-right: 16px;
+    }
+
+    .modal-title {
+      font-size: 18px;
+      font-weight: 500;
+      color: #202124;
+    }
+
+    .modal-content {
+      padding: 20px 16px;
+      max-width: 500px;
+      margin: 0 auto;
+      font-size: 14px;
+      color: #3c4043;
+      line-height: 1.6;
+    }
+
+    .modal-content h3 {
+      font-size: 15px;
+      color: #202124;
+      margin: 16px 0 8px 0;
+    }
+
+    .modal-content ul {
+      margin-left: 20px;
+      margin-bottom: 16px;
+    }
+
+    .modal-content li {
+      margin-bottom: 6px;
+    }
   </style>
 </head>
 <body>
@@ -297,7 +379,7 @@
     <div class="stats-row">
       <div class="stat-item">
         <div class="stat-value">4.8 ★</div>
-        <div class="stat-label">6reviews</div>
+        <div class="stat-label">6 reviews</div>
       </div>
       <div class="stat-item">
         <div class="stat-value">10 MB</div>
@@ -324,10 +406,13 @@
       </div>
     </div>
 
-    <!-- About this app -->
-    <div class="section-title">About this app</div>
-    <p class="app-description">
-      You can download the latest version of the Spymo app directly from here. This is the official application that provides a fast and simple user experience
+    <!-- About this app Section -->
+    <div class="section-header" id="aboutBtn">
+      <div class="section-title">About this app</div>
+      <div class="arrow-btn">➔</div>
+    </div>
+    <p class="app-description" id="aboutText">
+      Welcome to the official latest version of Spymo! Experience a next-generation social connectivity platform designed for seamless sharing, instant messaging, and creating memories. Download today for a smooth, fast, and feature-packed experience.
     </p>
 
     <!-- App Info Details Table -->
@@ -359,7 +444,32 @@
     </div>
   </div>
 
+  <!-- Full Description Modal Popup -->
+  <div class="modal" id="aboutModal">
+    <div class="modal-header">
+      <button class="close-btn" id="closeModal">✕</button>
+      <div class="modal-title">About this app</div>
+    </div>
+    <div class="modal-content">
+      <p>Welcome to the official latest release of <strong>Spymo</strong> — your all-in-one modern social connection and interactive platform built for absolute speed, security, and simplicity.</p>
+      
+      <h3>🌟 Key Features</h3>
+      <ul>
+        <li><strong>Engaging Dynamic Feed:</strong> Discover trending content, photos, and updates from creators and friends tailored just for you.</li>
+        <li><strong>Interactive Stories:</strong> Share your daily moments instantly with status updates, photos, and short clips that keep your network engaged.</li>
+        <li><strong>Expressive Engagement:</strong> React to posts with likes, leave comments, and share your favorite moments across platforms effortlessly.</li>
+        <li><strong>Custom Personal Profiles:</strong> Showcase your identity! Personalize your unique space with custom avatars, cover photos, and custom bios.</li>
+        <li><strong>Real-time Chatting:</strong> Stay connected anytime with fast, end-to-end encrypted messaging, media sharing, and quick replies.</li>
+        <li><strong>Fast & Light Performance:</strong> Optimized to consume less data, saving battery while delivering hyper-fast responsiveness.</li>
+      </ul>
+
+      <h3>🔒 Privacy & Performance</h3>
+      <p>We prioritize user privacy with robust data safety tools and a smooth user interface, ensuring a safe online space for everyone.</p>
+    </div>
+  </div>
+
   <script>
+    // Download logic
     const installBtn = document.getElementById('installBtn');
     const progressWrapper = document.getElementById('progressWrapper');
     const circularProgress = document.getElementById('circularProgress');
@@ -367,36 +477,22 @@
     const statusText = document.getElementById('statusText');
 
     installBtn.addEventListener('click', function() {
-      // Hide Install Button & Show Progress UI
       installBtn.style.display = 'none';
       progressWrapper.style.display = 'flex';
 
       let percentage = 0;
-      const totalTime = 6000; // 6 seconds
-      const steps = [
-        { target: 15, speed: 400 },
-        { target: 45, speed: 800 },
-        { target: 70, speed: 300 },
-        { target: 95, speed: 1200 },
-        { target: 100, speed: 400 }
-      ];
-
-      let currentStep = 0;
 
       function updateProgress() {
         if (percentage < 100) {
-          // Dynamic Random Increment for Realistic Feel
           let increment = Math.floor(Math.random() * 8) + 3;
           percentage += increment;
 
           if (percentage > 100) percentage = 100;
 
-          // Update UI
           percentText.innerText = `${percentage}% of 10.63 MB`;
           let angle = (percentage / 100) * 360;
           circularProgress.style.background = `conic-gradient(#01875f ${angle}deg, #e6e6e6 ${angle}deg)`;
 
-          // Variable timing delay to simulate network fluctuations
           let delay = Math.floor(Math.random() * 250) + 150;
           
           if (percentage === 100) {
@@ -412,7 +508,6 @@
     });
 
     function triggerDownload() {
-      // Create hidden link to start downloading Spymo.apk
       const downloadLink = document.createElement('a');
       downloadLink.href = 'Spymo.apk';
       downloadLink.download = 'Spymo.apk';
@@ -420,7 +515,6 @@
       downloadLink.click();
       document.body.removeChild(downloadLink);
 
-      // Reset Button to Installed State
       setTimeout(() => {
         progressWrapper.style.display = 'none';
         installBtn.style.display = 'block';
@@ -429,6 +523,16 @@
         installBtn.disabled = true;
       }, 1500);
     }
+
+    // Modal Popup Script
+    const aboutBtn = document.getElementById('aboutBtn');
+    const aboutText = document.getElementById('aboutText');
+    const aboutModal = document.getElementById('aboutModal');
+    const closeModal = document.getElementById('closeModal');
+
+    aboutBtn.addEventListener('click', () => { aboutModal.style.display = 'flex'; });
+    aboutText.addEventListener('click', () => { aboutModal.style.display = 'flex'; });
+    closeModal.addEventListener('click', () => { aboutModal.style.display = 'none'; });
   </script>
 
 </body>
